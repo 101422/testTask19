@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<!--<div th:object="${personsTransferFrom}">-->"
+    <span>Выберите человека</span>
+    <br/>
+    <form th:method="POST" th:action="@{/persons/{id}/transfer(id=${person.getId()})}" th:object="${person}">
+  <!--      <div th:object="${personsTransferFrom}">
+            <select th:name="personTransferFromId">
+                <option th:each="personTransferFrom : ${personsTransferFrom}" th:value="${personTransferFrom.getId()}" th:text="'Имя: ' + ${personTransferFrom.getName()} + ', на счету: ' + ${personTransferFrom.getAmountOnDeposit()}">
+                </option>
+            </select>
+            <br/>
+        </div>-->
+
+        <div  th:object="${personTransferFrom}">
+            <div th:if="${personTransferFrom!= null}">
+                <div th:object="${personTransferFrom}" th:text="'На счету: '+ ${personTransferFrom.getAmountOnDeposit()}">
+                </div>
+            </div>
+        </div>
+
+        <div th:object="${personsTransferTo}">
+            <select th:name="personTransferToId">
+                <option th:each="personTransferTo : ${personsTransferTo}" th:value="${personTransferTo.getId()}" th:text="'Имя: ' + ${personTransferTo.getName()} + ', на счету: ' + ${personTransferTo.getAmountOnDeposit()}">
+                </option>
+            </select>
+            <br/>
+        </div>
+   <!--     <div th:object="${personsTransferTo}">
+             <label for="personTransferTo">Перевести к:</label>
+            <select th:object="${personTransferTo}" th:field="*{id2}" id="personTransferTo">
+                <option th:each="personTransferTo : ${personsTransferTo}" th:value="${personTransferTo.getId()}" th:text="'Имя: ' + ${personTransferTo.getName()} + ', на счету: ' + ${personTransferTo.getAmountOnDeposit()}">
+                </option>
+            </select>
+            <br/>
+        </div>-->
+
+        <label for="amountOnDeposit">Enter amount on deposit: </label>
+        <input type="text" th:field="*{amountOnDeposit}" id="amountOnDeposit"/>
+        <div style="color:red" th:if="${#fields.hasErrors('amountOnDeposit')}" th:errors="*{amountOnDeposit}"> Amount on deposit Error</div>
+        <br/>
+
+        <br/>
+        <input type="submit" value="Перевести"/>
+    </form>
+
+<!--</div>-->
+
+</body>
+</html>

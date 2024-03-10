@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div>Введите критерии поиска </div>
+<form th:method="POST" th:action="@{/persons/search}">
+    <label for="dateOfBirthSearching">Дата: </label>
+    <input type="text" id="dateOfBirthSearching" name="dateOfBirthSearching"/>
+    <br/>
+    <label for="nameSearching">Имя: </label>
+    <input type="text" id="nameSearching" name="nameSearching"/>
+    <br/>
+    <label for="emailSearching">Email: </label>
+    <input type="text" id="emailSearching" name="emailSearching"/>
+    <br/>
+    <label for="phoneNumberSearching">Phone number: </label>
+    <input type="text" id="phoneNumberSearching" name="phoneNumberSearching"/>
+    <br/>
+    <input type="submit" value="Искать!"/>
+</form>
+
+<div th:if="${persons}">
+    <div th:if="${persons.isEmpty()}">
+        <span>Пользователи не найдены</span>
+    </div>
+
+    <div th:each="person : ${persons}">
+        <p th:text="${person.getUsername() + ', ' + person.getDateOfBirth()}">person</p>
+
+     <!--   <div th:if="${book.getOwner() != null}">
+            <span>Книга сейчас у: </span> <span th:text="${book.getOwner().getFullName()}">Person Name</span>
+        </div>
+
+        <div th:if="${book.getOwner() == null}">
+            <span>Книга свободна</span>
+        </div>-->
+
+        <hr/>
+    </div>
+</div>
+
+</body>
+</html>

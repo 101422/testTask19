@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update user</title>
+</head>
+<body>
+
+<!--<form  th:object="${person}">  &lt;!&ndash;th:method="PATCH" th:action="@{/persons/{id}(id=${person.getId()})}"&ndash;&gt;-->
+ <!--   <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <br/>
+    <label for="dateOfBirth">Enter age: </label>
+    <input type="text" th:field="*{dateOfBirth}" id="dateOfBirth"/>
+    <div style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Age Error</div>
+    <br/>
+    <input type="submit" value="Update!"/>
+    <br/>-->
+<label>User emails: </label>
+<div th:each="personEmail : ${personEmails}">
+
+    <a th:href="@{/persons/{id}(id=${personEmail.getId()})}"
+       th:text="${personEmail.getEmail()}">person Email</a>
+
+    <div th:unless="personEmail == null">
+        <form th:method="PATCH" th:action="@{/persons/{id}/{emailId}/deleteEmail(id=${person.getId()}, emailId=${personEmail.getId()})}" th:object="${person}">
+            <input type="submit" value="Delete"/>
+        </form>
+    </div>
+</div>
+<br/>
+<form th:method="POST" th:action="@{/persons/{id}/addEmail(id=${person.getId()})}" th:object="${personEmail}">
+
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Email Error</div>
+    <br/>
+
+    <input type="submit" value="Add!"/>
+</form>
+<br/>
+<!--</form>-->
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Logout" />
+</form>
+<br/>
+<label>User phone number: </label>
+<div th:each="personPhoneNumber : ${personPhoneNumbers}">
+    <a th:href="@{/persons/{id}(id=${personPhoneNumber.getId()})}"
+       th:text="${personPhoneNumber.getPhoneNumber()}">person Email</a>
+
+    <div th:unless="personPhoneNumber == null">
+        <form th:method="PATCH" th:action="@{/persons/{id}/{emailId}/deletePhoneNumber(id=${person.getId()}, emailId=${personPhoneNumber.getId()})}" th:object="${person}">
+            <input type="submit" value="Delete"/>
+        </form>
+    </div>
+</div>
+<br/>
+<form th:method="POST" th:action="@{/persons/{id}/addPhoneNumber(id=${person.getId()})}" th:object="${personPhoneNumber}">
+
+    <label for="email">Enter phone number: </label>
+    <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
+    <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"> Phone Number Error</div>
+    <br/>
+
+    <input type="submit" value="Add!"/>
+</form>
+<br/>
+<!--</form>-->
+<form th:method="GET" th:action="@{/persons/{id}/transfer(id=${person.getId()})}">
+    <input type="submit" value="Перевести деньги" />
+</form>
+<br/>
+<!--</form>-->
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Logout" />
+</form>
+<br/>
+</body>
+</html>
